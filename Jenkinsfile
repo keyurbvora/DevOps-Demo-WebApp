@@ -28,13 +28,13 @@ pipeline {
            steps {
                 sh 'mvn compile' 
             }
-			post {
-				always {
-					jiraSendBuildInfo site: 'devopsbc-b3-t3.atlassian.net'
+			//post {
+				//always {
+					//jiraSendBuildInfo site: 'devopsbc-b3-t3.atlassian.net'
 					//jiraSendBuildInfo branch: 'DEVOPS-1', site: 'devopsbc-b3-t3.atlassian.net'
 					//jiraSendBuildInfo site: 'devopsbc-b3-t3.atlassian.net', issueKeys: ['DEVOPS*]
-       }
-   }
+      // }
+   //}
 		}
 		
 		stage ('Package') {

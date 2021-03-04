@@ -59,7 +59,7 @@ pipeline {
 		
 		stage ('Deploy to QA') {
            steps {
-			deploy adapters: [tomcat8(credentialsId: '7c688857-573b-45f8-a4ec-fd7975194aa4', path: '', url: 'http://3.141.10.252:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
+			deploy adapters: [tomcat8(credentialsId: '7c688857-573b-45f8-a4ec-fd7975194aa4', path: '', url: 'http://172.31.24.65:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
 			}
 		}
 
@@ -76,7 +76,7 @@ pipeline {
 		//}
 		stage ('Deploy to Prod') {
            steps {
-			deploy adapters: [tomcat8(credentialsId: '7c688857-573b-45f8-a4ec-fd7975194aa4', path: '', url: 'http://18.219.44.32:8080')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
+			deploy adapters: [tomcat8(credentialsId: '7c688857-573b-45f8-a4ec-fd7975194aa4', path: '', url: 'http://172.31.30.162:8080')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
 			}
 		}
 		

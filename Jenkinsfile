@@ -43,23 +43,23 @@ pipeline {
             }
 		}
 		
-		stage ('Publish to artifactory') {
-			steps {
-				script {
-				def server = Artifactory.server('artifactory')
-				def rtMaven = Artifactory.newMavenBuild()
-				rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
-				rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
-				rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.war")
-				def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'install'
-				server.publishBuildInfo buildInfo
-				}
-			}
-		}
+		//stage ('Publish to artifactory') {
+		//	steps {
+		//		script {
+		//		def server = Artifactory.server('artifactory')
+		//		def rtMaven = Artifactory.newMavenBuild()
+		//		rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
+		//		rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
+		//		rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.war")
+		//		def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'install'
+		//		server.publishBuildInfo buildInfo
+		//		}
+		//	}
+		//}
 		
 		stage ('Deploy to QA') {
            steps {
-			deploy adapters: [tomcat8(credentialsId: '7c688857-573b-45f8-a4ec-fd7975194aa4', path: '', url: 'http://172.31.1.112:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
+			deploy adapters: [tomcat8(credentialsId: '7c688857-573b-45f8-a4ec-fd7975194aa4', path: '', url: 'http://3.141.10.252:8080')], contextPath: '/QAWebapp', onFailure: false, war: '**/*.war'
 			}
 		}
 
@@ -76,7 +76,7 @@ pipeline {
 		//}
 		stage ('Deploy to Prod') {
            steps {
-			deploy adapters: [tomcat8(credentialsId: '7c688857-573b-45f8-a4ec-fd7975194aa4', path: '', url: 'http://172.31.7.79:8080')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
+			deploy adapters: [tomcat8(credentialsId: '7c688857-573b-45f8-a4ec-fd7975194aa4', path: '', url: 'http://18.219.44.32:8080')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'
 			}
 		}
 		

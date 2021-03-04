@@ -69,11 +69,11 @@ pipeline {
 				publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\functionaltest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'UI Test Report', reportTitles: ''])
             }
 		}
-		//stage ('Run Performance Test') {
-		//	steps{
-		//		blazeMeterTest credentialsId: 'BlazeMeter', testId: '9014608.taurus', workspaceId: '756649'
-		//	}
-		//}
+		stage ('Run Performance Test') {
+			steps{
+				blazeMeterTest credentialsId: 'blazeid', testId: '9014506.taurus', workspaceId: '756607'
+			}
+		}
 		stage ('Deploy to Prod') {
            steps {
 			deploy adapters: [tomcat8(credentialsId: 'tomcatprod', path: '', url: ' http://172.31.30.162:8080/')], contextPath: '/ProdWebapp', onFailure: false, war: '**/*.war'

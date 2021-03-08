@@ -71,6 +71,7 @@ pipeline {
 		stage ('Run Performance Test') {
 			steps{
 				//blazeMeterTest credentialsId: 'blazeid', testId: '9014506.taurus', workspaceId: '756607'
+				echo "running blazemeter"
 			}
 		}
 		stage ('Deploy to Prod') {
